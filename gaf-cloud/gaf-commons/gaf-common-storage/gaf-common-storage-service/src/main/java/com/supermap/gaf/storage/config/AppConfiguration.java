@@ -6,7 +6,11 @@
 package com.supermap.gaf.storage.config;
 
 import com.supermap.gaf.storage.service.MinioConfigHandlerI;
+import com.supermap.gaf.storage.service.S3ClientService;
+import com.supermap.gaf.storage.service.TenantMinioConfigService;
 import com.supermap.gaf.storage.service.impl.MultiTenantMinioConfigHandler;
+import com.supermap.gaf.storage.service.impl.S3ClientServiceImpl;
+import com.supermap.gaf.storage.service.impl.TenantMinioConfigServiceImpl;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -26,5 +30,20 @@ public class AppConfiguration {
     @ConditionalOnMissingBean(MinioConfigHandlerI.class)
     public MinioConfigHandlerI minioConfigHandlerI(){
         return new MultiTenantMinioConfigHandler();
+    }
+    @Bean
+    @ConditionalOnMissingBean(MinioConfigHandlerI.class)
+    public S3ClientService s3ClientService(){
+        return new S3ClientServiceImpl();
+    }
+    @Bean
+    @ConditionalOnMissingBean(MinioConfigHandlerI.class)
+    TenantMinioConfigService tenantMinioConfigService(){
+        return new TenantMinioConfigServiceImpl();
+    }
+    @Bean
+    @ConditionalOnMissingBean(MinioConfigHandlerI.class)
+    public TenantMinioConfig tenantMinioConfig(){
+        return new TenantMinioConfig();
     }
 }

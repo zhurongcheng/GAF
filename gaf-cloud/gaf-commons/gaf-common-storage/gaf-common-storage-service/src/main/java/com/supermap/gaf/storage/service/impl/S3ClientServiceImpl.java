@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
@@ -44,7 +43,6 @@ import static com.supermap.gaf.storage.enums.TenantMode.SINGLE_NODE_MULTI_BUCKET
  * @date:2021/3/25
  * @author heykb
  */
-@Service
 public class S3ClientServiceImpl implements S3ClientService {
 
     private static final Logger logger = LoggerFactory.getLogger(S3ClientServiceImpl.class);
@@ -83,6 +81,10 @@ public class S3ClientServiceImpl implements S3ClientService {
             try{
                 s3Client.createBucket(minioConfig.getBucketName());
                 initBucketPolicy(s3Client,minioConfig.getBucketName());
+            }catch (AmazonS3Exception e){
+                if(e.getStatusCode()!=409){
+                    e.printStackTrace();
+                }
             }catch (Exception e){
                 logger.info("已初始化桶:{}",minioConfig.getBucketName());
             }
@@ -304,4 +306,6 @@ public class S3ClientServiceImpl implements S3ClientService {
 //        acl.grantPermission(new CanonicalGrantee(acl.getOwner().getId()), Permission.Read);
 //        s3Client().setObjectAcl(bucketName,minioConfigHandlerI.encodeKeyName(keyName),acl);
     }
+
+
 }

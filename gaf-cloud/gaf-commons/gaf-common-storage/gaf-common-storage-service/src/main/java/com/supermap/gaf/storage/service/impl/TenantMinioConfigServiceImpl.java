@@ -13,7 +13,6 @@ import com.supermap.gaf.storage.spi.TenantInfoI;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.security.sasl.AuthenticationException;
 import java.util.Map;
@@ -22,7 +21,6 @@ import java.util.Map;
  * @date:2021/3/25
  * @author heykb
  */
-@Service
 public class TenantMinioConfigServiceImpl implements TenantMinioConfigService {
     @Autowired
     private TenantMinioConfig tenantMinioConfig;

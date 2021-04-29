@@ -8,7 +8,6 @@ package com.supermap.gaf.storage.config;
 import com.supermap.gaf.storage.enums.TenantMode;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
@@ -18,7 +17,6 @@ import java.util.Map;
  */
 @ConfigurationProperties(prefix = "minio")
 @Data
-@Configuration
 public class TenantMinioConfig {
     private Map<String, MinioConfig> config;
     private MinioConfig singleConfig;

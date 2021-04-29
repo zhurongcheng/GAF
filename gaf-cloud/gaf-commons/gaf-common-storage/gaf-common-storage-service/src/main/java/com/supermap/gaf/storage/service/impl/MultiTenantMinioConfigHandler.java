@@ -26,8 +26,7 @@ import static com.supermap.gaf.storage.enums.TenantMode.*;
  * @date:2021/3/25
  * @author heykb
  */
-//@Component
-//@ConditionalOnMissingBean(MinioConfigHandlerI.class)
+
 public class MultiTenantMinioConfigHandler implements MinioConfigHandlerI {
 
     @Autowired
